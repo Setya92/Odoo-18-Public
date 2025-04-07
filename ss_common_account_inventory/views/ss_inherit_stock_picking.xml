@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<odoo>
+
+	<record
+		id="view_picking_form_extends_to_add_account_coa"
+		model="ir.ui.view">
+		<field name="name">view.picking.form.extends.to.add.account.coa
+		</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form" />
+		<field name="arch" type="xml">
+			<field name="picking_type_id" position="after">
+				<field name="type_transfer_stock"/>
+				<field name="coa_revisi_id"/>
+			</field>
+
+			<button name="action_cancel" position="after">
+				<button name="set_coa_for_adjustment"
+					string="Adjust COA"
+					type="object"
+					class="oe_highlight"
+				/>
+				<button name="set_active_inactive"
+					type="object"
+					string="Hide"
+					invisible="state in ['cancel']"
+					class="oe_highlight"
+				/>
+			</button>
+
+
+
+		</field>
+	</record>
+
+	<record
+		id="view_picking_type_form_extends_to_add_account_coa"
+		model="ir.ui.view">
+		<field name="name">view.picking.type.form.extends.to.add.account.coa
+		</field>
+		<field name="model">stock.picking.type</field>
+		<field name="inherit_id" ref="stock.view_picking_type_form" />
+		<field name="arch" type="xml">
+            <xpath expr="//group[@name='stock_picking_type_lot']" position="after">
+                <group string="Account For Adjustment type">
+					<field name="type_transfer_stock"/>
+					<field name="coa_revisi_id"/>
+                </group>
+            </xpath>
+		</field>
+	</record>
+
+</odoo>

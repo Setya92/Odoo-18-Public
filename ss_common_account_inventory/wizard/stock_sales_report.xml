@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--form-->
+    <record id="salesitem_monthly_report_form" model="ir.ui.view">
+        <field name="name">salesitem.monthly.report.form</field>
+        <field name="model">salesitem.monthly.report</field>
+        <field name="arch" type="xml">
+            <form string="Sales Per Item Monthly Report'">
+                <group>
+                    <group>
+						<field name="product_by"/>
+                        <field name="partner_by"/>
+                        <field name="method_by"/>
+                        
+                    </group>
+                    <group>
+                        <field name="start_date" string="From Date"/>
+						<field name="end_date" string="To Date"/>
+                        <field name="durasi" groups="base.no_one"/>
+                    </group>
+					<group string="Product" invisible="product_by not in ['selected']"/>
+						<field name="product_ids" invisible="product_by not in ['selected']"/>
+					<group string="Customer" invisible="partner_by not in ['selected']"/>
+						<field name="partner_ids" invisible="partner_by not in ['selected']"/>
+                </group>
+                <footer>
+                    <button string="Print Excel" name="export_excel" type="object" class="oe_highlight"/>&#160;or
+                    <button string="Close Window" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="action_salesitem_monthly_report" model="ir.actions.act_window">
+        <field name="name">Sales per Item Monthly Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">salesitem.monthly.report</field>
+        <field name="context">{}</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="salesitem_monthly_report_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menus-->
+    <menuitem
+        name="Report"
+        id="menu_report_snb"
+        parent="stock.menu_warehouse_report"
+        sequence="50"/>
+
+    <menuitem name="Sales per Item Monthly Report"
+            id="menu_salesitem_monthly_report"
+            action="action_salesitem_monthly_report"
+            parent="menu_report_snb"
+            sequence="1"/>
+
+</odoo>
