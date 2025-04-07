@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--form-->
+    <record id="stock_management_report_report_form" model="ir.ui.view">
+        <field name="name">stock.management.report.form</field>
+        <field name="model">stock.management.report</field>
+        <field name="arch" type="xml">
+            <form string="Stock Managament Report">
+                <group>
+                    <group>
+						<field name="product_by"/>
+                        <field name="partner_by"/>
+                        <field name="method_by"/>
+                        <field name="stock_mode"/>
+                        
+                    </group>
+                    <group>
+                        <field name="start_date" string="From Date"/>
+						<field name="end_date" string="To Date"/>
+                        <field name="durasi" groups="base.no_one"/>
+                    </group>
+					<group string="Product"/>
+						<field name="product_ids"/>
+					<group string="Customer"/>
+						<field name="partner_ids"/>
+                </group>
+                <footer>
+                    <button string="Print Excel" name="export_excel" type="object" class="oe_highlight"/>&#160;or
+                    <button string="Close Window" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="action_stock_management_report_report" model="ir.actions.act_window">
+        <field name="name">Stock Managament Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.management.report</field>
+        <field name="context">{}</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_management_report_report_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!--Menus-->
+    <menuitem name="Stock movement Report"
+              id="stock_management_movement_monthly_report"
+              action="action_stock_management_report_report"
+              parent="ss_common_account_inventory.menu_report_snb"
+              sequence="2"/>
+
+</odoo>
